@@ -5,9 +5,19 @@ RUN \
     apt-get update && \
     apt-get install -y \
         libpcre3-dev \
+        libpq-dev \
+        libmcrypt-dev \
+        libsqlite3-dev \
         git \
         gcc \
         make && \
+    docker-php-ext-install \
+        mbstring \
+        mcrypt \
+        pdo \
+        pdo_mysql \
+        pdo_pgsql \
+        pdo_sqlite && \
     git clone --depth=1 git://github.com/phalcon/cphalcon.git && \
     cd cphalcon/build && \
     ./install && \
@@ -24,4 +34,3 @@ WORKDIR /app
 # Set up the command arguments
 CMD ["commands"]
 ENTRYPOINT ["phalcon"]
-
